@@ -46,15 +46,27 @@ public class QuizGenerator {
     }
 
     private List<Quiz> parseQuizzes(String responseText) {
+        System.out.println("Gemini 응답 원문:\n" + responseText);
         List<Quiz> quizzes = new ArrayList<>();
         try {
-            JsonArray jsonArray = com.google.gson.JsonParser.parseString(responseText).getAsJsonArray();
+            int startIdx = responseText.indexOf('[');
+            int endIdx = responseText.lastIndexOf(']');
+            if (startIdx == -1 || endIdx == -1 || startIdx >= endIdx) {
+                System.err.println("JSON 배열 형식이 아님:\n" + responseText);
+                return quizzes;
+            }
+
+            String jsonPart = responseText.substring(startIdx, endIdx + 1);
+
+            JsonArray jsonArray = com.google.gson.JsonParser.parseString(jsonPart).getAsJsonArray();
             jsonArray.forEach(element -> {
                 JsonObject obj = element.getAsJsonObject();
                 String question = obj.get("question").getAsString();
+
                 JsonArray optionsArray = obj.getAsJsonArray("options");
                 List<String> options = new ArrayList<>();
                 optionsArray.forEach(o -> options.add(o.getAsString()));
+
                 String answer = obj.get("answer").getAsString();
 
                 quizzes.add(new Quiz(question, options, answer));
