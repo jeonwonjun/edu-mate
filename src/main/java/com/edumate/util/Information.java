@@ -1,7 +1,7 @@
 package com.edumate.util;
 
 public enum Information {
-    INPUT_QUESTION("무엇이든 물어보세요.");
+    INPUT_QUESTION("무엇을 공부하셨나요?");
 
     private final String information;
 
