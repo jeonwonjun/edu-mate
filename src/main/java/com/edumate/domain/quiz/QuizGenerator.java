@@ -46,7 +46,6 @@ public class QuizGenerator {
     }
 
     private List<Quiz> parseQuizzes(String responseText) {
-        System.out.println("Gemini 응답 원문:\n" + responseText);
         List<Quiz> quizzes = new ArrayList<>();
         try {
             int startIdx = responseText.indexOf('[');
