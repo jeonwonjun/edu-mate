@@ -21,6 +21,10 @@ public class Quiz {
         return options;
     }
 
+    public String getAnswer() {
+        return answer;
+    }
+
     public boolean checkAnswer(String userAnswer) {
         return userAnswer.trim().equalsIgnoreCase(answer.trim());
     }
