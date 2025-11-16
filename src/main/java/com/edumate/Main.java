@@ -3,6 +3,7 @@ package com.edumate;
 
 import com.edumate.domain.feedback.Feedback;
 import com.edumate.domain.feedback.FeedbackGenerator;
+import com.edumate.domain.quiz.AnswerChecker;
 import com.edumate.domain.quiz.Quiz;
 import com.edumate.domain.quiz.QuizGenerator;
 import com.edumate.io.GeminiClient;
@@ -18,7 +19,6 @@ public class Main {
         GeminiClient client = new GeminiClient();
         QuizGenerator quizGenerator = new QuizGenerator(client);
         FeedbackGenerator feedbackGenerator = new FeedbackGenerator(client);
-
         System.out.println(Information.INPUT_QUESTION.getMessage());
         String question = InputHandler.read();
 
