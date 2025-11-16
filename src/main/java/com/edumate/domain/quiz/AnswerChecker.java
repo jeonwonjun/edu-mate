@@ -10,7 +10,7 @@ public class AnswerChecker {
         }
 
         String normalizedCorrect = normalize(quiz.getAnswer());
-        return normalizedUserAnswer.equals(normalizedCorrect);
+        return normalizedCorrect.contains(normalizedUserAnswer);
     }
 
     private boolean checkByNumeric(Quiz quiz, String normalizedUserAnswer) {

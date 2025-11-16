@@ -22,7 +22,7 @@ public class Quiz {
     public List<String> getOptions() {
         return options;
     }
-    public boolean isCorrect(String userAnswer) {
+    public boolean checkAnswer(String userAnswer) {
         return answerChecker.isCorrect(this, userAnswer);
     }
 

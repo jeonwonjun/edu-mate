@@ -33,14 +33,13 @@ public class QuizGenerator {
             
             내용:
             %s
-            
             출력 예시:
             [
-              {
-                "question": "OOP의 4가지 특징 중 캡슐화란?",
-                "options": ["데이터 은닉", "코드 재사용", "상속", "다형성"],
-                "answer": "데이터 은닉"
-              }
+                {
+                    "question": "OOP의 4가지 특징 중 캡슐화란?",
+                    "options": ["1. 데이터 은닉", "2. 코드 재사용", "3. 상속", "4. 다형성"],
+                    "answer": "1"
+                }
             ]
             """.formatted(count, topic);
     }
