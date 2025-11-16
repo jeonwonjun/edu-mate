@@ -3,15 +3,14 @@ package com.edumate;
 
 import com.edumate.domain.feedback.Feedback;
 import com.edumate.domain.feedback.FeedbackGenerator;
-import com.edumate.domain.quiz.AnswerChecker;
 import com.edumate.domain.quiz.Quiz;
 import com.edumate.domain.quiz.QuizGenerator;
 import com.edumate.io.GeminiClient;
 import com.edumate.io.InputHandler;
+import com.edumate.io.OutputHandler;
 import com.edumate.util.Information;
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -25,12 +24,13 @@ public class Main {
         List<Quiz> quizzes = quizGenerator.generate(question, 3);
 
         for (Quiz quiz : quizzes) {
-            System.out.println(quiz);
+            OutputHandler.printQuiz(quiz);
 
+            System.out.print("답변: ");
             String userAnswer = InputHandler.read();
             Feedback feedback = feedbackGenerator.generate(quiz, userAnswer);
 
-            System.out.println(feedback);
+            OutputHandler.printFeedback(feedback);
         }
     }
 }
