@@ -14,10 +14,6 @@ public class Feedback {
 
     @Override
     public String toString() {
-        String info = "정답: ";
-        if (!isCorrect) {
-            info = "오답: ";
-        }
-        return info + message;
+        return message;
     }
 }
