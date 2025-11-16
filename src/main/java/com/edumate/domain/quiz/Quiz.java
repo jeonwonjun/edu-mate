@@ -6,11 +6,13 @@ public class Quiz {
     private final String question;
     private final List<String> options;
     private final String answer;
+    private final AnswerChecker answerChecker;
 
     public Quiz(String question, List<String> options, String answer) {
         this.question = question;
         this.options = options;
         this.answer = answer;
+        this.answerChecker = new AnswerChecker();
     }
 
     public String getQuestion() {
@@ -20,13 +22,12 @@ public class Quiz {
     public List<String> getOptions() {
         return options;
     }
+    public boolean isCorrect(String userAnswer) {
+        return answerChecker.isCorrect(this, userAnswer);
+    }
 
     public String getAnswer() {
         return answer;
-    }
-
-    public boolean checkAnswer(String userAnswer) {
-        return userAnswer.trim().equalsIgnoreCase(answer.trim());
     }
 
     @Override
