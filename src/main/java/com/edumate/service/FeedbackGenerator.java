@@ -1,7 +1,7 @@
 package com.edumate.domain.feedback;
 
 import com.edumate.domain.quiz.Quiz;
-import com.edumate.io.GeminiClient;
+import com.edumate.infra.gemini.GeminiClient;
 import java.util.Optional;
 
 public class FeedbackGenerator {

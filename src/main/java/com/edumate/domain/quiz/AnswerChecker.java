@@ -1,26 +1,35 @@
 package com.edumate.domain.quiz;
 
+import java.util.List;
+
 public class AnswerChecker {
 
-    public boolean isCorrect(Quiz quiz, String userInput) {
+    public boolean isCorrect(String correctAnswer,
+                             List<String> options,
+                             String userInput) {
+
         String normalizedUserAnswer = normalize(userInput);
 
         if (isNumeric(normalizedUserAnswer)) {
-            return checkByNumeric(quiz, normalizedUserAnswer);
+            return checkByNumeric(correctAnswer, options, normalizedUserAnswer);
         }
 
-        String normalizedCorrect = normalize(quiz.getAnswer());
+        String normalizedCorrect = normalize(correctAnswer);
         return normalizedCorrect.contains(normalizedUserAnswer);
     }
 
-    private boolean checkByNumeric(Quiz quiz, String normalizedUserAnswer) {
+    private boolean checkByNumeric(String correctAnswer,
+                                   List<String> options,
+                                   String normalizedUserAnswer) {
+
         int index = Integer.parseInt(normalizedUserAnswer) - 1;
-        if (index >= 0 && index < quiz.getOptions().size()) {
-            String optionText = normalize(quiz.getOptions().get(index));
-            String correct = normalize(quiz.getAnswer());
-            return optionText.equals(correct);
+        if (index < 0 || index >= options.size()) {
+            return false;
         }
-        return false;
+
+        String optionText = normalize(options.get(index));
+        String correct = normalize(correctAnswer);
+        return optionText.equals(correct);
     }
 
     private boolean isNumeric(String userInput) {
