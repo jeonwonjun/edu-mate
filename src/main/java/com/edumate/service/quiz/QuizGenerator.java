@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public class QuizGenerator {
 
-    private static final int QUIZ_COUNT = 3;
+    private static final int QUIZ_COUNT = 5;
 
     private final LlmClient llmClient;
     private final QuizPromptBuilder promptBuilder;
