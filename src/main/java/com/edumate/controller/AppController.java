@@ -5,11 +5,14 @@ import com.edumate.domain.feedback.FeedbackPromptContext;
 import com.edumate.domain.quiz.AnswerChecker;
 import com.edumate.domain.quiz.Difficulty;
 import com.edumate.domain.quiz.Quiz;
+import com.edumate.domain.session.QuizSession;
 import com.edumate.infra.feedback.FeedbackPromptBuilder;
 import com.edumate.infra.gemini.GeminiClient;
 import com.edumate.infra.quiz.QuizPromptBuilder;
 import com.edumate.service.feedback.FeedbackGenerator;
+import com.edumate.service.quiz.DifficultyAdjuster;
 import com.edumate.service.quiz.QuizGenerator;
+import com.edumate.service.quiz.StreakBasedDifficultyAdjuster;
 import com.edumate.ui.console.InputHandler;
 import com.edumate.ui.console.OutputHandler;
 import com.edumate.util.llm.LlmClient;
@@ -20,6 +23,8 @@ public class AppController {
     private final QuizGenerator quizGenerator;
     private final FeedbackGenerator feedbackGenerator;
     private final AnswerChecker answerChecker;
+    private final QuizSession quizSession;
+    private final DifficultyAdjuster difficultyAdjuster;
 
     public AppController() {
         LlmClient llmClient = new GeminiClient();
@@ -30,11 +35,13 @@ public class AppController {
         this.quizGenerator = new QuizGenerator(llmClient, quizPromptBuilder, gson);
         this.feedbackGenerator = new FeedbackGenerator(llmClient, feedbackPromptBuilder);
         this.answerChecker = new AnswerChecker();
+        this.quizSession = new QuizSession(Difficulty.MEDIUM);
+        this.difficultyAdjuster = new StreakBasedDifficultyAdjuster();
     }
 
     public void run() {
         String topic = askTopic();
-        Difficulty level = Difficulty.MEDIUM;
+        Difficulty level = quizSession.getCurrentDifficulty();
 
         List<Quiz> quizzes = quizGenerator.generate(topic, level);
         if (quizzes.isEmpty()) {
@@ -72,7 +79,23 @@ public class AppController {
 
         OutputHandler.showFeedback(feedback);
 
+        updateSession(correct);
+
         return true;
+    }
+
+    private void updateSession(boolean correct) {
+        if (correct) {
+            quizSession.markCorrect();
+        }
+
+        if (!correct) {
+            quizSession.markWrong();
+        }
+
+        Difficulty next = difficultyAdjuster.adjust(quizSession);
+
+        quizSession.updateDifficulty(next);
     }
 
     private boolean isQuit(String userAnswer) {
