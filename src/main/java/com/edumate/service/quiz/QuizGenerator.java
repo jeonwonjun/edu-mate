@@ -7,13 +7,12 @@ import com.edumate.infra.quiz.QuizJsonParser;
 import com.edumate.infra.quiz.QuizPromptBuilder;
 import com.edumate.util.llm.LlmClient;
 import com.google.gson.Gson;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 public class QuizGenerator {
 
-    private static final int QUIZ_COUNT = 5;
+    private static final int QUIZ_COUNT = 1;
 
     private final LlmClient llmClient;
     private final QuizPromptBuilder promptBuilder;
@@ -25,21 +24,23 @@ public class QuizGenerator {
         this.gson = gson;
     }
 
-
-    public List<Quiz> generate(String studyNotes, Difficulty level) {
+    public Quiz generateOne(String studyNotes, Difficulty level) {
         QuizPromptContext context = new QuizPromptContext(studyNotes, level, QUIZ_COUNT);
         String prompt = promptBuilder.build(context);
 
         Optional<String> response = llmClient.generate(prompt);
         if (response.isEmpty()) {
-            System.err.println("퀴즈 생성 실패: LLM 응답 없음");
-            return Collections.emptyList();
+            return null;
         }
 
         QuizJsonParser parser = new QuizJsonParser(gson);
+        List<Quiz> quizzes = parser.parse(response.get());
 
-        return parser.parse(response.get());
+        if (quizzes.isEmpty()) {
+            return null;
+        }
+
+        return quizzes.getFirst();
     }
-
 
 }

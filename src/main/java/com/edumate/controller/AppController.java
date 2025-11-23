@@ -17,7 +17,6 @@ import com.edumate.ui.console.InputHandler;
 import com.edumate.ui.console.OutputHandler;
 import com.edumate.util.llm.LlmClient;
 import com.google.gson.Gson;
-import java.util.List;
 
 public class AppController {
     private final QuizGenerator quizGenerator;
@@ -41,15 +40,17 @@ public class AppController {
 
     public void run() {
         String topic = askTopic();
-        Difficulty level = quizSession.getCurrentDifficulty();
 
-        List<Quiz> quizzes = quizGenerator.generate(topic, level);
-        if (quizzes.isEmpty()) {
-            System.out.println("퀴즈 생성에 실패했습니다.");
-            return;
-        }
+        boolean running = true;
+        while (running) {
+            Difficulty level = quizSession.getCurrentDifficulty();
 
-        for (Quiz quiz : quizzes) {
+            Quiz quiz = quizGenerator.generateOne(topic, level);
+            if (quiz == null) {
+                System.out.println("퀴즈 생성 실패: quiz가 비어있음");
+                return;
+            }
+
             boolean continueQuiz = askOneQuiz(quiz, level);
             if (!continueQuiz) {
                 System.out.println("퀴즈를 종료합니다.");
@@ -94,7 +95,6 @@ public class AppController {
         }
 
         Difficulty next = difficultyAdjuster.adjust(quizSession);
-
         quizSession.updateDifficulty(next);
     }
 
