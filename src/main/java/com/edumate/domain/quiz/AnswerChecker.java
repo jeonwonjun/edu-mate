@@ -9,27 +9,36 @@ public class AnswerChecker {
                              String userInput) {
 
         String normalizedUserAnswer = normalize(userInput);
+        if (normalizedUserAnswer.isEmpty()) {
+            return false;
+        }
 
         if (isNumeric(normalizedUserAnswer)) {
-            return checkByNumeric(correctAnswer, options, normalizedUserAnswer);
+            return checkByIndex(correctAnswer, options, normalizedUserAnswer);
         }
 
         String normalizedCorrect = normalize(correctAnswer);
+
+        if (normalizedCorrect.equals(normalizedUserAnswer)) {
+            return true;
+        }
+
         return normalizedCorrect.contains(normalizedUserAnswer);
     }
 
-    private boolean checkByNumeric(String correctAnswer,
-                                   List<String> options,
-                                   String normalizedUserAnswer) {
+    private boolean checkByIndex(String correctAnswer,
+                                 List<String> options,
+                                 String numericInput) {
 
-        int index = Integer.parseInt(normalizedUserAnswer) - 1;
+        int index = Integer.parseInt(numericInput) - 1;
         if (index < 0 || index >= options.size()) {
             return false;
         }
 
-        String optionText = normalize(options.get(index));
-        String correct = normalize(correctAnswer);
-        return optionText.equals(correct);
+        String selectedOption = normalize(options.get(index));
+        String normalizedCorrect = normalize(correctAnswer);
+
+        return selectedOption.equals(normalizedCorrect);
     }
 
     private boolean isNumeric(String userInput) {
