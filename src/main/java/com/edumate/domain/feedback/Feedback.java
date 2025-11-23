@@ -1,19 +1,19 @@
 package com.edumate.domain.feedback;
 
-import com.edumate.domain.quiz.Quiz;
-import com.edumate.io.GeminiClient;
-
 public class Feedback {
-    private final boolean isCorrect;
+    private final boolean correct;
     private final String message;
 
-    public Feedback(boolean isCorrect, String message) {
-        this.isCorrect = isCorrect;
+    public Feedback(boolean correct, String message) {
+        this.correct = correct;
         this.message = message;
     }
 
-    @Override
-    public String toString() {
+    public boolean isCorrect() {
+        return correct;
+    }
+
+    public String getMessage() {
         return message;
     }
 }
