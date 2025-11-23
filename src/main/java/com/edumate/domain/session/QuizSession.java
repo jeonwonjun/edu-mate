@@ -7,12 +7,24 @@ public class QuizSession {
     private int correctStreak;
     private int wrongStreak;
 
+    public QuizSession(Difficulty difficulty) {
+        this.currentDifficulty = difficulty;
+        this.correctStreak = 0;
+        this.wrongStreak = 0;
+    }
+
     public void markCorrect() {
+        wrongStreak = 0;
         correctStreak++;
     }
 
     public void markWrong() {
+        correctStreak = 0;
         wrongStreak++;
+    }
+
+    public void updateDifficulty(Difficulty next) {
+        currentDifficulty = next;
     }
 
     public Difficulty getCurrentDifficulty() {

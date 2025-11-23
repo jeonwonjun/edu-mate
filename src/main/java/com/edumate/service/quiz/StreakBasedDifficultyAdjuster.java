@@ -16,7 +16,7 @@ public class StreakBasedDifficultyAdjuster implements DifficultyAdjuster {
         if (quizSession.getWrongStreak() >= STREAK_BASE) {
             return decrease(current);
         }
-
+        
         return current;
     }
 
