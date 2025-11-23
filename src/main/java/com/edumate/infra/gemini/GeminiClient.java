@@ -19,6 +19,10 @@ public class GeminiClient implements LlmClient {
     private final GeminiRequestBuilder geminiRequestBuilder;
     private final GeminiResponseParser geminiResponseParser;
 
+    public GeminiClient() {
+        this(new GeminiRequestBuilder(), new GeminiResponseParser());
+    }
+
     public GeminiClient(GeminiRequestBuilder geminiRequestBuilder, GeminiResponseParser geminiResponseParser) {
         this.apiKey = System.getenv("GEMINI_API_KEY");
         if (apiKey == null) {
