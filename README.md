@@ -16,8 +16,12 @@ EduMate는 학습 과정의 “이해”와 “성장”에 초점을 맞춘 Jav
 - LLM API와 백엔드 로직 연동
 - 단위 책임별 테스트 작성
 
-## 시연 이미지
-추가 예정
+## 시연 영상 & 이미지
+#### 퀴즈 생성 및 정답 피드백 시연 영상
+https://github.com/user-attachments/assets/08db9567-51b5-4fe2-b512-869d2f542bad
+
+#### 2연속 정답 시 난이도 상향 및 오답 피드백 이미지
+<img width="1310" height="323" alt="image" src="https://github.com/user-attachments/assets/c28587bc-6718-4d74-bd0f-1a31f38638f0" />
 
 ## 핵심 기능
 
