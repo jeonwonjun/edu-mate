@@ -124,7 +124,10 @@ sequenceDiagram
 | 지은 | 23세 | 프로그래밍을 처음 배우는 대학생 | 공부는 했지만 개념을 정확히 이해했는지 스스로 점검하기 어려움 |
 | 민수 | 27세 | 이직 준비 중인 주니어 개발자 | 학습한 내용을 복습하고, 누락된 부분을 피드백받으며 체계적으로 공부하고 싶음 |
 
-## 9. 향후 개발 계획 (Roadmap)
+## 테스트 전략 다이어그램
+<img width="1510" height="840" alt="image" src="https://github.com/user-attachments/assets/d00ba46a-1e78-4bc8-bb28-7072a3daef61" />
+
+## 향후 개발 계획 (Roadmap)
 
  1. 꼬리질문 생성 기능
  2. Console → Web UI 확장
