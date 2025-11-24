@@ -34,7 +34,7 @@ public class AppController {
         this.quizGenerator = new QuizGenerator(llmClient, quizPromptBuilder, gson);
         this.feedbackGenerator = new FeedbackGenerator(llmClient, feedbackPromptBuilder);
         this.answerChecker = new AnswerChecker();
-        this.quizSession = new QuizSession(Difficulty.MEDIUM);
+        this.quizSession = new QuizSession(Difficulty.EASY);
         this.difficultyAdjuster = new StreakBasedDifficultyAdjuster();
     }
 
