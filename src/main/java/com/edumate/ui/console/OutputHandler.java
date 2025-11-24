@@ -22,7 +22,7 @@ public class OutputHandler {
         }
 
         System.out.println();
-        System.out.printf("정답 번호 또는 내용을 입력하세요. (종료: q): ");
+        System.out.print("정답 번호 또는 내용을 입력하세요. (종료: q): ");
     }
 
     public static void showFeedback(Feedback feedback) {

@@ -3,23 +3,25 @@ package com.edumate.domain.session;
 import com.edumate.domain.quiz.Difficulty;
 
 public class QuizSession {
+
+    private static final int ZERO = 0;
     private Difficulty currentDifficulty;
     private int correctStreak;
     private int wrongStreak;
 
     public QuizSession(Difficulty difficulty) {
         this.currentDifficulty = difficulty;
-        this.correctStreak = 0;
-        this.wrongStreak = 0;
+        this.correctStreak = ZERO;
+        this.wrongStreak = ZERO;
     }
 
     public void markCorrect() {
-        wrongStreak = 0;
+        wrongStreak = ZERO;
         correctStreak++;
     }
 
     public void markWrong() {
-        correctStreak = 0;
+        correctStreak = ZERO;
         wrongStreak++;
     }
 

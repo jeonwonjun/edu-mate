@@ -12,8 +12,6 @@ public class QuizPromptBuilder implements PromptBuilder<QuizPromptContext> {
         Difficulty level = context.getDifficulty();
         int count = context.getCount();
 
-        String difficultyInstruction = level.getPromptInstruction();
-
         return """
                 다음 내용을 바탕으로 %d개의 객관식 퀴즈를 JSON 배열 형식으로만 만들어줘.
                 난이도는 '%s' (%s)에 맞춰줘.
