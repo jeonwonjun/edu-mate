@@ -133,4 +133,3 @@ sequenceDiagram
  2. Console → Web UI 확장
  3. 세션 관리(사용자의 약점 추적)
  4. 학습 결과 리포트 생성
-
